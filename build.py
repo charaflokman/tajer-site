@@ -5,7 +5,6 @@ import sys
 
 OWNER = sys.argv[1] if len(sys.argv) > 1 else "OWNER"
 VERSION = "1.4.0-beta.1"
-REL = f"https://github.com/{OWNER}/tajer-site/releases/download/v{VERSION}/"
 FILES = {
     "win64": ("Tajer-1.4-beta-win64.exe", "92 MB"),
     "win32": ("Tajer-1.4-beta-win32.exe", "91 MB"),
@@ -90,7 +89,7 @@ def page(k):
     shots = "".join(f'<img src="{root}assets/img/{s}" alt="" loading="lazy" width="2049" height="1152">' for s in SHOTS[k])
     def dl(key, name, note):
         f, size = FILES[key]
-        return (f'<a class="dl" href="{REL}{f}"><span class="dl-name">{t[name]}</span>'
+        return (f'<a class="dl" href="{root}downloads/{f}" download><span class="dl-name">{t[name]}</span>'
                 f'<span class="dl-note">{t[note]}</span><span class="dl-meta">{f} · {size}</span></a>')
     return f"""<!doctype html>
 <html lang="{t['lang']}" dir="{t['dir']}">
