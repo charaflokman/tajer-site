@@ -1,0 +1,16 @@
+Source code offer
+=================
+
+This program contains code licensed under the MRPL 1.2 (Mozilla Public License 1.1 with a
+permitted attribution clause) and libraries licensed under the GNU LGPL and other open-source
+licences listed in THIRD_PARTY_LICENSES.md.
+
+The complete source code of this version of the program, including every modification made
+to the Original Code (Floreant POS), is available from the distributor who supplied this copy
+(the seller named on your purchase invoice), on request, free of charge apart from the cost of
+the medium, for at least twelve months after this version was supplied to you, and in any case
+for as long as this version is distributed.
+
+The source code of the LGPL libraries used without modification is available from their
+projects, listed with their addresses in THIRD_PARTY_LICENSES.md. How to replace the OpenPDF
+library with your own build is explained in that file.

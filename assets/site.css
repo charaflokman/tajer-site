@@ -1,0 +1,72 @@
+/* Tajer site: same tokens as branding/BRAND.md. Paper and ink, one saffron accent. */
+@font-face { font-family: "Noto Sans"; src: url("fonts/NotoSans-Regular.ttf"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Noto Sans"; src: url("fonts/NotoSans-Bold.ttf"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Noto Sans Arabic"; src: url("fonts/NotoSansArabic-Regular.ttf"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Noto Sans Arabic"; src: url("fonts/NotoSansArabic-Bold.ttf"); font-weight: 700; font-display: swap; }
+
+:root {
+  --ink: #1D1B17; --paper: #F5F2EA; --surface: #FFFFFF; --surface-alt: #ECE7DB; --line: #D6D0C2;
+  --muted: #5C574D; --accent: #F2A900; --accent-surface: #FCE8B2; --warning: #8A4B00;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 400 17px/1.6 "Noto Sans", "Noto Sans Arabic", system-ui, sans-serif;
+}
+[dir="rtl"] body, body:lang(ar) { font-family: "Noto Sans Arabic", "Noto Sans", system-ui, sans-serif; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+h1, h2, h3 { line-height: 1.25; margin: 0; }
+h1 { font-size: clamp(30px, 5vw, 48px); font-weight: 700; max-width: 18em; }
+h2 { font-size: 24px; margin: 56px 0 20px; }
+h2 small { font-size: 15px; font-weight: 400; color: var(--muted); }
+h3 { font-size: 18px; }
+
+.bar { background: var(--ink); color: var(--paper); }
+.bar-in { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 700; font-size: 22px; }
+.bar nav { display: flex; gap: 20px; }
+.bar nav a { text-decoration: none; opacity: .85; padding: 10px 0; }
+.bar nav a:hover, .bar nav a:focus-visible { opacity: 1; text-decoration: underline; text-underline-offset: 6px; }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.hero { padding-top: 64px; }
+.lead { font-size: 19px; color: var(--muted); max-width: 42em; margin: 20px 0 0; }
+.beta { display: inline-block; margin: 24px 0 0; padding: 10px 14px; background: var(--accent-surface);
+  border-inline-start: 4px solid var(--warning); font-size: 15px; }
+
+.dls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.dl { display: flex; flex-direction: column; gap: 4px; padding: 20px; min-height: 44px; background: var(--surface);
+  border: 1px solid var(--line); text-decoration: none; }
+.dl:first-child { background: var(--accent); border-color: var(--accent); }
+.dl:hover { border-color: var(--ink); }
+.dl-name { font-weight: 700; font-size: 20px; }
+.dl-note { font-size: 15px; }
+.dl-meta { font-size: 13px; color: var(--muted); direction: ltr; unicode-bidi: isolate; }
+.dl:first-child .dl-meta { color: var(--ink); }
+
+.shot-row { display: grid; grid-template-columns: 1fr 1fr 180px; gap: 16px; align-items: start; }
+.shot-row img { border: 1px solid var(--line); background: var(--surface); }
+
+.feats { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line); }
+.feats li { padding: 24px 0; padding-inline-end: 24px; border-bottom: 1px solid var(--line); }
+.feats p { margin: 8px 0 0; color: var(--muted); }
+
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.list { padding-inline-start: 1.2em; margin: 0; }
+.list li { margin-bottom: 8px; }
+
+.legal p { color: var(--muted); max-width: 46em; }
+.links { display: flex; flex-wrap: wrap; gap: 24px; }
+.links a { color: var(--ink); text-underline-offset: 4px; padding: 10px 0; }
+.foot { padding: 48px 16px; margin-top: 56px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+
+@media (max-width: 760px) {
+  .dls, .feats, .two { grid-template-columns: 1fr; }
+  .shot-row { grid-template-columns: 1fr; }
+  .shot-row .phone { max-width: 240px; }
+  .hero { padding-top: 40px; }
+}
