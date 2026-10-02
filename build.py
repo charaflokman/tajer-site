@@ -4,11 +4,11 @@ import os
 import sys
 
 OWNER = sys.argv[1] if len(sys.argv) > 1 else "OWNER"
-VERSION = "1.4.0-beta.1"
+VERSION = "1.0.0-beta.2"
 FILES = {
-    "win64": ("Tajer-1.4-beta-win64.exe", "92 MB"),
-    "win32": ("Tajer-1.4-beta-win32.exe", "91 MB"),
-    "apk": ("Tajer-1.4-beta.apk", "10 MB"),
+    "win64": ("Tajer-1.0.0-beta.2-win64.exe", "92 MB"),
+    "win32": ("Tajer-1.0.0-beta.2-win32.exe", "92 MB"),
+    "apk": ("Tajer-1.0.0-beta.2.apk", "4 MB"),
 }
 
 T = {
