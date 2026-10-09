@@ -4,11 +4,11 @@ import os
 import sys
 
 OWNER = sys.argv[1] if len(sys.argv) > 1 else "OWNER"
-VERSION = "1.0.0-beta.3"
+VERSION = "1.0.0"
 FILES = {
-    "win64": ("Tajer-1.0.0-beta.3-win64.exe", "92 MB"),
-    "win32": ("Tajer-1.0.0-beta.3-win32.exe", "92 MB"),
-    "apk": ("Tajer-1.0.0-beta.3.apk", "4 MB"),
+    "win64": ("Tajer-1.0.0-win64.exe", "93 MB"),
+    "win32": ("Tajer-1.0.0-win32.exe", "93 MB"),
+    "apk": ("Tajer-1.0.0.apk", "4 MB"),
 }
 
 T = {
@@ -16,7 +16,7 @@ T = {
         dir="rtl", lang="ar", title="تاجر — برنامج نقطة البيع للمحلات",
         tag="برنامج بيع ومخزون وديون لكل محل، يعمل بلا إنترنت.",
         lead="البيع بالباركود، ودفتر الديون، والمخزون بتاريخ الصلاحية، والمشتريات، والتقارير، والنسخ الاحتياطي. على الحاسوب وعلى الهاتف، بالعربية والفرنسية والإنجليزية والإسبانية والإيطالية والألمانية.",
-        beta="نسخة تجريبية (Beta): للتجربة فقط، وقد تتغير البيانات بين النسخ. احتفظ بنسخة احتياطية.",
+        beta="النسخة 1.0.0: أول نسخة نهائية. احتفظ دائما بنسخة احتياطية من بياناتك.",
         dl="التحميل", win64="ويندوز 64 بت", win64n="لأغلب الحواسيب (ويندوز 7 فما فوق)",
         win32="ويندوز 32 بت", win32n="للحواسيب القديمة", apk="أندرويد", apkn="أندرويد 5 فما فوق — اسمح بالتثبيت من مصادر غير معروفة",
         feat="ما يقدمه", f=[
@@ -37,7 +37,7 @@ T = {
         dir="ltr", lang="fr", title="Tajer — logiciel de caisse pour commerces",
         tag="Caisse, stock et crédit clients pour tout commerce, sans Internet.",
         lead="Vente au code-barres, carnet de crédit, stock avec dates de péremption, achats, rapports et sauvegardes. Sur ordinateur et sur téléphone, en arabe, français, anglais, espagnol, italien et allemand.",
-        beta="Version d'essai (bêta) : pour tester uniquement, les données peuvent changer d'une version à l'autre. Faites une sauvegarde.",
+        beta="Version 1.0.0 : première version stable. Faites toujours une sauvegarde de vos données.",
         dl="Télécharger", win64="Windows 64 bits", win64n="La plupart des PC (Windows 7 et plus)",
         win32="Windows 32 bits", win32n="Anciens PC", apk="Android", apkn="Android 5 et plus — autorisez les sources inconnues",
         feat="Ce qu'il fait", f=[
@@ -58,7 +58,7 @@ T = {
         dir="ltr", lang="en", title="Tajer — point of sale for shops",
         tag="Sales, stock and customer credit for any shop, offline.",
         lead="Barcode sales, credit book, stock with expiry dates, purchases, reports and backups. On desktop and on the phone, in Arabic, French, English, Spanish, Italian and German.",
-        beta="Beta version: for testing only; data may change between versions. Keep a backup.",
+        beta="Version 1.0.0: first stable release. Always keep a backup of your data.",
         dl="Download", win64="Windows 64-bit", win64n="Most PCs (Windows 7 and later)",
         win32="Windows 32-bit", win32n="Older PCs", apk="Android", apkn="Android 5 and later — allow unknown sources",
         feat="What it does", f=[
