@@ -8,7 +8,7 @@ VERSION = "1.0.0"
 FILES = {
     "win64": ("Tajer-1.0.0-win64.exe", "93 MB"),
     "win32": ("Tajer-1.0.0-win32.exe", "93 MB"),
-    "apk": ("Tajer-1.0.0.apk", "4 MB"),
+    "apk": ("Tajer-1.0.1.apk", "4 MB"),
 }
 
 T = {
