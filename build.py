@@ -76,6 +76,45 @@ T = {
         l1="Source offer", l2="MRPL licence", l3="Third-party licences", other="العربية", other2="Français",
     ),
 }
+VIDEOS = [
+    ("01-sell-cash", "البيع نقدا"), ("02-sell-credit", "البيع بالدين"), ("03-return", "إرجاع بضاعة"),
+    ("04-receive-goods", "استلام بضاعة من المورد"), ("05-import-pdf-invoice", "استيراد فاتورة PDF"),
+    ("06-record-loss", "تسجيل تالف أو ضائع"), ("07-stock-count", "جرد المخزون"), ("08-print-labels", "طباعة ملصقات الأسعار"),
+    ("09-close-day", "إغلاق اليوم"), ("10-backup", "النسخ الاحتياطي"), ("11-link-device", "ربط جهاز آخر"),
+    ("12-themes", "تغيير المظهر"),
+]
+VID_LINK = {"ar": "videos/", "fr": "../videos/", "en": "../videos/"}
+VID_LABEL = {"ar": "فيديوهات الشرح", "fr": "Vidéos (arabe)", "en": "Videos (Arabic)"}
+
+def videos_page():
+    cards = "".join(
+        f'<li><a href="ar/{n}.mp4"><img src="ar/{n}.png" alt="" loading="lazy" width="640" height="360">'
+        f'<span>{i:02d}. {t}</span></a></li>' for i, (n, t) in enumerate(VIDEOS, 1))
+    return f"""<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>فيديوهات الشرح — تاجر</title>
+<meta name="description" content="فيديوهات قصيرة بالعربية تشرح استعمال تاجر خطوة بخطوة.">
+<link rel="icon" href="../assets/img/tajer-tile-32.png">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="bar"><div class="wrap bar-in">
+  <a class="brand" href="../"><img src="../assets/img/tajer-tile.svg" alt="" width="36" height="36"><span>تاجر</span></a>
+  <nav><a href="../">الرئيسية</a></nav>
+</div></header>
+<main class="wrap">
+  <h1>فيديوهات الشرح</h1>
+  <p class="lead">فيديوهات قصيرة بالعربية، كل واحد يشرح مهمة من يوم المحل. تحتاج إلى الإنترنت لمشاهدتها.</p>
+  <ul class="vids">{cards}</ul>
+</main>
+<footer class="wrap foot">Tajer · تاجر — v{VERSION}</footer>
+</body>
+</html>
+"""
+
 LINKS = {"ar": ("fr/", "en/"), "fr": ("../", "../en/"), "en": ("../", "../fr/")}
 SHOTS = {"ar": ["desktop-checkout-ar.png", "desktop-home-ar.png"], "fr": ["desktop-checkout-fr.png", "desktop-home-fr.png"],
          "en": ["desktop-checkout-fr.png", "desktop-home-fr.png"]}
@@ -104,7 +143,7 @@ def page(k):
 <body>
 <header class="bar"><div class="wrap bar-in">
   <a class="brand" href="{root}"><img src="{root}assets/img/tajer-tile.svg" alt="" width="36" height="36"><span>{'تاجر' if k == 'ar' else 'Tajer'}</span></a>
-  <nav><a href="{LINKS[k][0]}">{t['other']}</a><a href="{LINKS[k][1]}">{t['other2']}</a></nav>
+  <nav><a href="{VID_LINK[k]}">{VID_LABEL[k]}</a><a href="{LINKS[k][0]}">{t['other']}</a><a href="{LINKS[k][1]}">{t['other2']}</a></nav>
 </div></header>
 <main>
 <section class="hero wrap">
@@ -130,4 +169,6 @@ for k, sub in (("ar", ""), ("fr", "fr"), ("en", "en")):
     d = os.path.join(here, sub)
     os.makedirs(d, exist_ok=True)
     io.open(os.path.join(d, "index.html"), "w", encoding="utf-8", newline="\n").write(page(k))
+os.makedirs(os.path.join(here, "videos"), exist_ok=True)
+io.open(os.path.join(here, "videos", "index.html"), "w", encoding="utf-8", newline=chr(10)).write(videos_page())
 print("built for", OWNER)
