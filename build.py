@@ -232,7 +232,7 @@ def page(k):
 <body>
 <header class="bar"><div class="wrap bar-in">
   <a class="brand" href="{root}"><img src="{root}assets/img/tajer-tile.svg" alt="" width="36" height="36"><span>{'تاجر' if k == 'ar' else 'Tajer'}</span></a>
-  <nav><a href="blocked/">{BL[k]['nav']}</a><a href="{VID_LINK[k]}">{VID_LABEL[k]}</a><a href="{LINKS[k][0]}">{t['other']}</a><a href="{LINKS[k][1]}">{t['other2']}</a></nav>
+  <nav><a href="blocked/">{BL[k]['nav']}</a><a href="{LINKS[k][0]}">{t['other']}</a><a href="{LINKS[k][1]}">{t['other2']}</a></nav>
 </div></header>
 <main>
 <section class="hero wrap">
