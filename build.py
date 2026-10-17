@@ -4,19 +4,35 @@ import os
 import sys
 
 OWNER = sys.argv[1] if len(sys.argv) > 1 else "OWNER"
-VERSION = "1.0.3"
+DESKTOP_VERSION = "1.0.4"  # change here to switch the Windows download names
+ANDROID_VERSION = "1.0.3"  # change here to switch the Android download name
+VERSION = DESKTOP_VERSION
 FILES = {
-    "win64": ("Tajer-1.0.3-win64.exe", "98 MB"),
-    "win32": ("Tajer-1.0.3-win32.exe", "98 MB"),
-    "apk": ("Tajer-1.0.3.apk", "7 MB"),
+    "win64": (f"Tajer-{DESKTOP_VERSION}-win64.exe", "99 MB"),
+    "win32": (f"Tajer-{DESKTOP_VERSION}-win32.exe", "98 MB"),
+    "apk": (f"Tajer-{ANDROID_VERSION}.apk", "7 MB"),
 }
+
+
+def load_sums():
+    out = {}
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "downloads", "SHA256SUMS.txt")
+    if os.path.exists(p):
+        for line in io.open(p, encoding="utf-8"):
+            parts = line.strip().split(None, 1)
+            if len(parts) == 2 and len(parts[0]) == 64:
+                out[parts[1].lstrip("*").strip()] = parts[0].lower()
+    return out
+
+
+SUMS = load_sums()
 
 T = {
     "ar": dict(
         dir="rtl", lang="ar", title="تاجر — برنامج نقطة البيع للمحلات",
         tag="برنامج بيع ومخزون وديون لكل محل، يعمل بلا إنترنت.",
         lead="البيع بالباركود، ودفتر الديون، والمخزون بتاريخ الصلاحية، والمشتريات، والتقارير، والنسخ الاحتياطي. على الحاسوب وعلى الهاتف، بالعربية والفرنسية والإنجليزية والإسبانية والإيطالية والألمانية.",
-        beta="النسخة 1.0.3. احتفظ دائما بنسخة احتياطية من بياناتك.",
+        beta="النسخة @V. احتفظ دائما بنسخة احتياطية من بياناتك.",
         dl="التحميل", win64="ويندوز 64 بت", win64n="لأغلب الحواسيب (ويندوز 7 فما فوق)",
         win32="ويندوز 32 بت", win32n="للحواسيب القديمة", apk="أندرويد", apkn="أندرويد 5 فما فوق — اسمح بالتثبيت من مصادر غير معروفة",
         feat="ما يقدمه", f=[
@@ -37,7 +53,7 @@ T = {
         dir="ltr", lang="fr", title="Tajer — logiciel de caisse pour commerces",
         tag="Caisse, stock et crédit clients pour tout commerce, sans Internet.",
         lead="Vente au code-barres, carnet de crédit, stock avec dates de péremption, achats, rapports et sauvegardes. Sur ordinateur et sur téléphone, en arabe, français, anglais, espagnol, italien et allemand.",
-        beta="Version 1.0.3. Faites toujours une sauvegarde de vos données.",
+        beta="Version @V. Faites toujours une sauvegarde de vos données.",
         dl="Télécharger", win64="Windows 64 bits", win64n="La plupart des PC (Windows 7 et plus)",
         win32="Windows 32 bits", win32n="Anciens PC", apk="Android", apkn="Android 5 et plus — autorisez les sources inconnues",
         feat="Ce qu'il fait", f=[
@@ -58,7 +74,7 @@ T = {
         dir="ltr", lang="en", title="Tajer — point of sale for shops",
         tag="Sales, stock and customer credit for any shop, offline.",
         lead="Barcode sales, credit book, stock with expiry dates, purchases, reports and backups. On desktop and on the phone, in Arabic, French, English, Spanish, Italian and German.",
-        beta="Version 1.0.3. Always keep a backup of your data.",
+        beta="Version @V. Always keep a backup of your data.",
         dl="Download", win64="Windows 64-bit", win64n="Most PCs (Windows 7 and later)",
         win32="Windows 32-bit", win32n="Older PCs", apk="Android", apkn="Android 5 and later — allow unknown sources",
         feat="What it does", f=[
@@ -76,6 +92,30 @@ T = {
         l1="Source offer", l2="MRPL licence", l3="Third-party licences", other="العربية", other2="Français",
     ),
 }
+BL = {
+ "ar": dict(nav="ويندوز حظر الملف؟", title="ويندوز حظر الملف — تاجر", h="ويندوز حظر الملف؟ لا تقلق",
+  intro="تاجر برنامج سليم، لكنه جديد وغير موقّع رقميا بعد، فيظنه ويندوز أو مضاد الفيروسات مجهولا. إليك الحلول الثلاثة، ثم طريقة التأكد أن الملف سليم.",
+  s1="1) رسالة زرقاء «Windows protected your PC»", s1t="اضغط «More info» (معلومات إضافية)، ثم يظهر زر «Run anyway» (تشغيل على أي حال). اضغطه.",
+  s2="2) الملف لا يفتح أو يرفض التشغيل", s2t="اضغط بالزر الأيمن على الملف، اختر «Properties» (خصائص). أسفل النافذة ضع علامة على «Unblock» (إلغاء الحظر)، ثم «OK». شغّل الملف من جديد.",
+  s3="3) مضاد الفيروسات حذف الملف أو أنذر", s3t="هذا إنذار خاطئ شائع للبرامج الجديدة. تأكد من البصمة (القسم التالي)، فإن تطابقت اسمح بالملف من «Allowed threats» أو أضفه للاستثناءات في مضاد الفيروسات ثم حمّله من جديد.",
+  sh="كيف أتأكد أن الملف سليم؟ (SHA256)", sht=["افتح مجلد التحميلات، اضغط على شريط العنوان واكتب cmd ثم Enter.", "اكتب الأمر التالي (غيّر اسم الملف) ثم Enter:", "قارن الأرقام والحروف الطويلة مع المكتوبة بجانب زر التحميل في الموقع (أو في ملف SHA256SUMS.txt). إن تطابقت كلها فالملف سليم. إن اختلفت فلا تشغله وأعد التحميل."],
+  mi="More info", ra="Run anyway", un="Unblock", back="رجوع إلى التحميل", pic="صورة توضيحية مبسطة"),
+ "fr": dict(nav="Windows a bloqué le fichier ?", title="Windows a bloqué le fichier — Tajer", h="Windows a bloqué le fichier ? Pas de panique",
+  intro="Tajer est sain, mais il est récent et pas encore signé numériquement : Windows ou l'antivirus le croit inconnu. Voici trois solutions, puis comment vérifier que le fichier est intact.",
+  s1="1) Message bleu « Windows protected your PC »", s1t="Cliquez « More info » (Informations complémentaires), puis le bouton « Run anyway » (Exécuter quand même) apparaît. Cliquez dessus.",
+  s2="2) Le fichier ne s'ouvre pas", s2t="Clic droit sur le fichier, « Properties » (Propriétés). En bas, cochez « Unblock » (Débloquer), puis « OK ». Relancez le fichier.",
+  s3="3) L'antivirus a supprimé le fichier ou donne une alerte", s3t="C'est une fausse alerte fréquente pour les logiciels récents. Vérifiez l'empreinte (section suivante) ; si elle correspond, autorisez le fichier dans « Menaces autorisées » ou ajoutez-le aux exclusions de l'antivirus, puis retéléchargez.",
+  sh="Comment vérifier le fichier ? (SHA256)", sht=["Ouvrez le dossier Téléchargements, cliquez dans la barre d'adresse, tapez cmd puis Entrée.", "Tapez la commande suivante (changez le nom du fichier) puis Entrée :", "Comparez la longue suite de chiffres et lettres avec celle affichée près du bouton de téléchargement (ou dans SHA256SUMS.txt). Si tout correspond, le fichier est intact. Sinon, ne le lancez pas et retéléchargez."],
+  mi="More info", ra="Run anyway", un="Unblock", back="Retour au téléchargement", pic="Image explicative simplifiée"),
+ "en": dict(nav="Windows blocked the file?", title="Windows blocked the file — Tajer", h="Windows blocked the file? Don't worry",
+  intro="Tajer is safe, but it is new and not digitally signed yet, so Windows or your antivirus treats it as unknown. Here are three fixes, then how to check the file is genuine.",
+  s1="1) Blue message \"Windows protected your PC\"", s1t="Click \"More info\", then the \"Run anyway\" button appears. Click it.",
+  s2="2) The file will not open", s2t="Right-click the file, choose \"Properties\". At the bottom tick \"Unblock\", then \"OK\". Run the file again.",
+  s3="3) The antivirus deleted the file or warned you", s3t="This is a common false alarm for new software. Check the fingerprint (next section); if it matches, allow the file in the antivirus \"Allowed threats\" or add it to the exclusions, then download again.",
+  sh="How do I check the file is genuine? (SHA256)", sht=["Open the Downloads folder, click the address bar, type cmd and press Enter.", "Type this command (change the file name) and press Enter:", "Compare the long string with the one shown next to the download button (or in SHA256SUMS.txt). If all of it matches, the file is genuine. If not, do not run it and download again."],
+  mi="More info", ra="Run anyway", un="Unblock", back="Back to download", pic="Simplified illustration"),
+}
+CP = {"ar": "نسخ الكامل", "fr": "Copier tout", "en": "Copy full"}
 VIDEOS = [
     ("01-sell-cash", "البيع نقدا"), ("02-sell-credit", "البيع بالدين"), ("03-return", "إرجاع بضاعة"),
     ("04-receive-goods", "استلام بضاعة من المورد"), ("05-import-pdf-invoice", "استيراد فاتورة PDF"),
@@ -115,6 +155,53 @@ def videos_page():
 </html>
 """
 
+def blocked_page(k):
+    b = BL[k]
+    t = T[k]
+    root = "../" if k == "ar" else "../../"
+    home = "../"
+    fn = FILES["win64"][0]
+
+    def fig(inner):
+        return f'<figure class="mock" dir="ltr">{inner}<figcaption>{b["pic"]}</figcaption></figure>'
+    f1 = fig(f'<div class="win"><div class="wt">Windows protected your PC</div><p>SmartScreen prevented an unrecognized app from starting.</p><p><u class="hl">{b["mi"]}</u></p><div class="btns"><span class="btn hl">{b["ra"]}</span><span class="btn">Don&#39;t run</span></div></div>')
+    f2 = fig(f'<div class="win"><div class="wt">{fn} - Properties</div><p>Security: this file came from another computer and might be blocked.</p><p><span class="chk hl">&#10003;</span> <b class="hl">{b["un"]}</b></p><div class="btns"><span class="btn hl">OK</span><span class="btn">Cancel</span></div></div>')
+    h = SUMS.get(fn)
+    shown = (h[:12] + "...") if h else "a1b2c3d4e5f6..."
+    f3 = fig(f'<div class="win term"><div class="wt">cmd</div><pre>C:\\Users\\you\\Downloads&gt;certutil -hashfile {fn} SHA256\nSHA256 hash of {fn}:\n<span class="hl">{shown}</span>\nCertUtil: -hashfile command completed successfully.</pre></div>')
+    cmd = f'<pre class="cmd" dir="ltr">certutil -hashfile {fn} SHA256</pre>'
+    return f"""<!doctype html>
+<html lang="{t['lang']}" dir="{t['dir']}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{b['title']}</title>
+<meta name="description" content="{b['intro']}">
+<link rel="icon" href="{root}assets/img/tajer-tile-32.png">
+<link rel="stylesheet" href="{root}assets/site.css">
+</head>
+<body>
+<header class="bar"><div class="wrap bar-in">
+  <a class="brand" href="{home}"><img src="{root}assets/img/tajer-tile.svg" alt="" width="36" height="36"><span>{'تاجر' if k == 'ar' else 'Tajer'}</span></a>
+  <nav><a href="{home}#download">{b['back']}</a></nav>
+</div></header>
+<main class="wrap help">
+  <h1>{b['h']}</h1>
+  <p class="lead">{b['intro']}</p>
+  <h2>{b['s1']}</h2><p>{b['s1t']}</p>{f1}
+  <h2>{b['s2']}</h2><p>{b['s2t']}</p>{f2}
+  <h2>{b['s3']}</h2><p>{b['s3t']}</p>
+  <h2>{b['sh']}</h2>
+  <ol class="list"><li>{b['sht'][0]}</li><li>{b['sht'][1]}{cmd}</li><li>{b['sht'][2]}</li></ol>{f3}
+  <p><a href="{home}#download">{b['back']}</a></p>
+</main>
+<footer class="wrap foot">Tajer · تاجر — v{VERSION}</footer>
+<script>document.addEventListener("click",function(e){{var b=e.target.closest(".cp");if(!b)return;var h=b.dataset.h,o=b.textContent;function ok(){{b.textContent="OK";setTimeout(function(){{b.textContent=o}},1500)}}if(navigator.clipboard){{navigator.clipboard.writeText(h).then(ok,function(){{prompt("SHA256",h)}})}}else{{prompt("SHA256",h)}}}});</script>
+</body>
+</html>
+"""
+
+
 LINKS = {"ar": ("fr/", "en/"), "fr": ("../", "../en/"), "en": ("../", "../fr/")}
 SHOTS = {"ar": ["desktop-checkout-ar.png", "desktop-home-ar.png"], "fr": ["desktop-checkout-fr.png", "desktop-home-fr.png"],
          "en": ["desktop-checkout-fr.png", "desktop-home-fr.png"]}
@@ -128,8 +215,10 @@ def page(k):
     shots = "".join(f'<img src="{root}assets/img/{s}" alt="" loading="lazy" width="2049" height="1152">' for s in SHOTS[k])
     def dl(key, name, note):
         f, size = FILES[key]
-        return (f'<a class="dl" href="{root}downloads/{f}" download><span class="dl-name">{t[name]}</span>'
-                f'<span class="dl-note">{t[note]}</span><span class="dl-meta">{f} · {size}</span></a>')
+        h = SUMS.get(f)
+        sha = (f'<div class="sha" dir="ltr">SHA256: <code>{h[:16]}</code> <button type="button" class="cp" data-h="{h}">{CP[k]}</button></div>') if h else ""
+        return (f'<div class="dlbox"><a class="dl" href="{root}downloads/{f}" download><span class="dl-name">{t[name]}</span>'
+                f'<span class="dl-note">{t[note]}</span><span class="dl-meta">{f} · {size}</span></a>{sha}</div>')
     return f"""<!doctype html>
 <html lang="{t['lang']}" dir="{t['dir']}">
 <head>
@@ -143,15 +232,16 @@ def page(k):
 <body>
 <header class="bar"><div class="wrap bar-in">
   <a class="brand" href="{root}"><img src="{root}assets/img/tajer-tile.svg" alt="" width="36" height="36"><span>{'تاجر' if k == 'ar' else 'Tajer'}</span></a>
-  <nav><a href="{VID_LINK[k]}">{VID_LABEL[k]}</a><a href="{LINKS[k][0]}">{t['other']}</a><a href="{LINKS[k][1]}">{t['other2']}</a></nav>
+  <nav><a href="blocked/">{BL[k]['nav']}</a><a href="{VID_LINK[k]}">{VID_LABEL[k]}</a><a href="{LINKS[k][0]}">{t['other']}</a><a href="{LINKS[k][1]}">{t['other2']}</a></nav>
 </div></header>
 <main>
 <section class="hero wrap">
   <h1>{t['tag']}</h1>
   <p class="lead">{t['lead']}</p>
-  <p class="beta">{t['beta']}</p>
+  <p class="beta">{t['beta'].replace('@V', VERSION)}</p>
   <h2 id="download">{t['dl']} <small>v{VERSION}</small></h2>
   <div class="dls">{dl('win64', 'win64', 'win64n')}{dl('win32', 'win32', 'win32n')}{dl('apk', 'apk', 'apkn')}</div>
+  <p class="blk"><a href="blocked/">{BL[k]['nav']}</a></p>
 </section>
 <section class="shots wrap"><h2>{t['shots']}</h2><div class="shot-row">{shots}<img class="phone" src="{root}assets/img/android-checkout-api34.png" alt="" loading="lazy" width="1080" height="2340"></div></section>
 <section class="wrap"><h2>{t['feat']}</h2><ul class="feats">{feats}</ul></section>
@@ -160,6 +250,7 @@ def page(k):
 <p class="links"><a href="{root}legal/SOURCE_OFFER.txt">{t['l1']}</a><a href="{root}legal/LICENSE-MRPL.txt">{t['l2']}</a><a href="{root}legal/THIRD_PARTY_LICENSES.md">{t['l3']}</a></p></section>
 </main>
 <footer class="wrap foot">Tajer · تاجر — v{VERSION}</footer>
+<script>document.addEventListener("click",function(e){{var b=e.target.closest(".cp");if(!b)return;var h=b.dataset.h,o=b.textContent;function ok(){{b.textContent="OK";setTimeout(function(){{b.textContent=o}},1500)}}if(navigator.clipboard){{navigator.clipboard.writeText(h).then(ok,function(){{prompt("SHA256",h)}})}}else{{prompt("SHA256",h)}}}});</script>
 </body>
 </html>
 """
@@ -169,6 +260,10 @@ for k, sub in (("ar", ""), ("fr", "fr"), ("en", "en")):
     d = os.path.join(here, sub)
     os.makedirs(d, exist_ok=True)
     io.open(os.path.join(d, "index.html"), "w", encoding="utf-8", newline="\n").write(page(k))
+for k, sub in (("ar", "blocked"), ("fr", "fr/blocked"), ("en", "en/blocked")):
+    d = os.path.join(here, sub)
+    os.makedirs(d, exist_ok=True)
+    io.open(os.path.join(d, "index.html"), "w", encoding="utf-8", newline="\n").write(blocked_page(k))
 os.makedirs(os.path.join(here, "videos"), exist_ok=True)
 io.open(os.path.join(here, "videos", "index.html"), "w", encoding="utf-8", newline=chr(10)).write(videos_page())
 print("built for", OWNER)
