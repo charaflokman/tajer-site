@@ -17,16 +17,16 @@
   <h1>ويندوز حظر الملف؟ لا تقلق</h1>
   <p class="lead">تاجر برنامج سليم، لكنه جديد وغير موقّع رقميا بعد، فيظنه ويندوز أو مضاد الفيروسات مجهولا. إليك الحلول الثلاثة، ثم طريقة التأكد أن الملف سليم.</p>
   <h2>1) رسالة زرقاء «Windows protected your PC»</h2><p>اضغط «More info» (معلومات إضافية)، ثم يظهر زر «Run anyway» (تشغيل على أي حال). اضغطه.</p><figure class="mock" dir="ltr"><div class="win"><div class="wt">Windows protected your PC</div><p>SmartScreen prevented an unrecognized app from starting.</p><p><u class="hl">More info</u></p><div class="btns"><span class="btn hl">Run anyway</span><span class="btn">Don&#39;t run</span></div></div><figcaption>صورة توضيحية مبسطة</figcaption></figure>
-  <h2>2) الملف لا يفتح أو يرفض التشغيل</h2><p>اضغط بالزر الأيمن على الملف، اختر «Properties» (خصائص). أسفل النافذة ضع علامة على «Unblock» (إلغاء الحظر)، ثم «OK». شغّل الملف من جديد.</p><figure class="mock" dir="ltr"><div class="win"><div class="wt">Tajer-1.0.4-win64.exe - Properties</div><p>Security: this file came from another computer and might be blocked.</p><p><span class="chk hl">&#10003;</span> <b class="hl">Unblock</b></p><div class="btns"><span class="btn hl">OK</span><span class="btn">Cancel</span></div></div><figcaption>صورة توضيحية مبسطة</figcaption></figure>
+  <h2>2) الملف لا يفتح أو يرفض التشغيل</h2><p>اضغط بالزر الأيمن على الملف، اختر «Properties» (خصائص). أسفل النافذة ضع علامة على «Unblock» (إلغاء الحظر)، ثم «OK». شغّل الملف من جديد.</p><figure class="mock" dir="ltr"><div class="win"><div class="wt">Tajer-1.0.5-win64.exe - Properties</div><p>Security: this file came from another computer and might be blocked.</p><p><span class="chk hl">&#10003;</span> <b class="hl">Unblock</b></p><div class="btns"><span class="btn hl">OK</span><span class="btn">Cancel</span></div></div><figcaption>صورة توضيحية مبسطة</figcaption></figure>
   <h2>3) مضاد الفيروسات حذف الملف أو أنذر</h2><p>هذا إنذار خاطئ شائع للبرامج الجديدة. تأكد من البصمة (القسم التالي)، فإن تطابقت اسمح بالملف من «Allowed threats» أو أضفه للاستثناءات في مضاد الفيروسات ثم حمّله من جديد.</p>
   <h2>كيف أتأكد أن الملف سليم؟ (SHA256)</h2>
-  <ol class="list"><li>افتح مجلد التحميلات، اضغط على شريط العنوان واكتب cmd ثم Enter.</li><li>اكتب الأمر التالي (غيّر اسم الملف) ثم Enter:<pre class="cmd" dir="ltr">certutil -hashfile Tajer-1.0.4-win64.exe SHA256</pre></li><li>قارن الأرقام والحروف الطويلة مع المكتوبة بجانب زر التحميل في الموقع (أو في ملف SHA256SUMS.txt). إن تطابقت كلها فالملف سليم. إن اختلفت فلا تشغله وأعد التحميل.</li></ol><figure class="mock" dir="ltr"><div class="win term"><div class="wt">cmd</div><pre>C:\Users\you\Downloads&gt;certutil -hashfile Tajer-1.0.4-win64.exe SHA256
-SHA256 hash of Tajer-1.0.4-win64.exe:
-<span class="hl">5b39a8f846c7...</span>
+  <ol class="list"><li>افتح مجلد التحميلات، اضغط على شريط العنوان واكتب cmd ثم Enter.</li><li>اكتب الأمر التالي (غيّر اسم الملف) ثم Enter:<pre class="cmd" dir="ltr">certutil -hashfile Tajer-1.0.5-win64.exe SHA256</pre></li><li>قارن الأرقام والحروف الطويلة مع المكتوبة بجانب زر التحميل في الموقع (أو في ملف SHA256SUMS.txt). إن تطابقت كلها فالملف سليم. إن اختلفت فلا تشغله وأعد التحميل.</li></ol><figure class="mock" dir="ltr"><div class="win term"><div class="wt">cmd</div><pre>C:\Users\you\Downloads&gt;certutil -hashfile Tajer-1.0.5-win64.exe SHA256
+SHA256 hash of Tajer-1.0.5-win64.exe:
+<span class="hl">f7099c29af27...</span>
 CertUtil: -hashfile command completed successfully.</pre></div><figcaption>صورة توضيحية مبسطة</figcaption></figure>
   <p><a href="../#download">رجوع إلى التحميل</a></p>
 </main>
-<footer class="wrap foot">Tajer · تاجر — v1.0.4</footer>
+<footer class="wrap foot">Tajer · تاجر — v1.0.5</footer>
 <script>document.addEventListener("click",function(e){var b=e.target.closest(".cp");if(!b)return;var h=b.dataset.h,o=b.textContent;function ok(){b.textContent="OK";setTimeout(function(){b.textContent=o},1500)}if(navigator.clipboard){navigator.clipboard.writeText(h).then(ok,function(){prompt("SHA256",h)})}else{prompt("SHA256",h)}});</script>
 </body>
 </html>
