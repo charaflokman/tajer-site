@@ -4,7 +4,7 @@ import os
 import sys
 
 OWNER = sys.argv[1] if len(sys.argv) > 1 else "OWNER"
-DESKTOP_VERSION = "1.0.5"  # change here to switch the Windows download names
+DESKTOP_VERSION = "1.0.6"  # change here to switch the Windows download names
 ANDROID_VERSION = "1.0.3"  # change here to switch the Android download name
 VERSION = DESKTOP_VERSION
 FILES = {

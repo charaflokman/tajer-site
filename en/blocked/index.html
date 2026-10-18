@@ -17,16 +17,16 @@
   <h1>Windows blocked the file? Don't worry</h1>
   <p class="lead">Tajer is safe, but it is new and not digitally signed yet, so Windows or your antivirus treats it as unknown. Here are three fixes, then how to check the file is genuine.</p>
   <h2>1) Blue message "Windows protected your PC"</h2><p>Click "More info", then the "Run anyway" button appears. Click it.</p><figure class="mock" dir="ltr"><div class="win"><div class="wt">Windows protected your PC</div><p>SmartScreen prevented an unrecognized app from starting.</p><p><u class="hl">More info</u></p><div class="btns"><span class="btn hl">Run anyway</span><span class="btn">Don&#39;t run</span></div></div><figcaption>Simplified illustration</figcaption></figure>
-  <h2>2) The file will not open</h2><p>Right-click the file, choose "Properties". At the bottom tick "Unblock", then "OK". Run the file again.</p><figure class="mock" dir="ltr"><div class="win"><div class="wt">Tajer-1.0.5-win64.exe - Properties</div><p>Security: this file came from another computer and might be blocked.</p><p><span class="chk hl">&#10003;</span> <b class="hl">Unblock</b></p><div class="btns"><span class="btn hl">OK</span><span class="btn">Cancel</span></div></div><figcaption>Simplified illustration</figcaption></figure>
+  <h2>2) The file will not open</h2><p>Right-click the file, choose "Properties". At the bottom tick "Unblock", then "OK". Run the file again.</p><figure class="mock" dir="ltr"><div class="win"><div class="wt">Tajer-1.0.6-win64.exe - Properties</div><p>Security: this file came from another computer and might be blocked.</p><p><span class="chk hl">&#10003;</span> <b class="hl">Unblock</b></p><div class="btns"><span class="btn hl">OK</span><span class="btn">Cancel</span></div></div><figcaption>Simplified illustration</figcaption></figure>
   <h2>3) The antivirus deleted the file or warned you</h2><p>This is a common false alarm for new software. Check the fingerprint (next section); if it matches, allow the file in the antivirus "Allowed threats" or add it to the exclusions, then download again.</p>
   <h2>How do I check the file is genuine? (SHA256)</h2>
-  <ol class="list"><li>Open the Downloads folder, click the address bar, type cmd and press Enter.</li><li>Type this command (change the file name) and press Enter:<pre class="cmd" dir="ltr">certutil -hashfile Tajer-1.0.5-win64.exe SHA256</pre></li><li>Compare the long string with the one shown next to the download button (or in SHA256SUMS.txt). If all of it matches, the file is genuine. If not, do not run it and download again.</li></ol><figure class="mock" dir="ltr"><div class="win term"><div class="wt">cmd</div><pre>C:\Users\you\Downloads&gt;certutil -hashfile Tajer-1.0.5-win64.exe SHA256
-SHA256 hash of Tajer-1.0.5-win64.exe:
-<span class="hl">f7099c29af27...</span>
+  <ol class="list"><li>Open the Downloads folder, click the address bar, type cmd and press Enter.</li><li>Type this command (change the file name) and press Enter:<pre class="cmd" dir="ltr">certutil -hashfile Tajer-1.0.6-win64.exe SHA256</pre></li><li>Compare the long string with the one shown next to the download button (or in SHA256SUMS.txt). If all of it matches, the file is genuine. If not, do not run it and download again.</li></ol><figure class="mock" dir="ltr"><div class="win term"><div class="wt">cmd</div><pre>C:\Users\you\Downloads&gt;certutil -hashfile Tajer-1.0.6-win64.exe SHA256
+SHA256 hash of Tajer-1.0.6-win64.exe:
+<span class="hl">7d7acc827e5b...</span>
 CertUtil: -hashfile command completed successfully.</pre></div><figcaption>Simplified illustration</figcaption></figure>
   <p><a href="../#download">Back to download</a></p>
 </main>
-<footer class="wrap foot">Tajer · تاجر — v1.0.5</footer>
+<footer class="wrap foot">Tajer · تاجر — v1.0.6</footer>
 <script>document.addEventListener("click",function(e){var b=e.target.closest(".cp");if(!b)return;var h=b.dataset.h,o=b.textContent;function ok(){b.textContent="OK";setTimeout(function(){b.textContent=o},1500)}if(navigator.clipboard){navigator.clipboard.writeText(h).then(ok,function(){prompt("SHA256",h)})}else{prompt("SHA256",h)}});</script>
 </body>
 </html>
