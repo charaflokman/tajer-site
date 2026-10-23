@@ -4,9 +4,11 @@ import os
 import sys
 
 OWNER = sys.argv[1] if len(sys.argv) > 1 else "OWNER"
-DESKTOP_VERSION = "1.0.7"  # change here to switch the Windows download names
+DESKTOP_VERSION = "1.0.8"  # change here to switch the Windows download names
 ANDROID_VERSION = "1.0.7"  # change here to switch the Android download name
 VERSION = DESKTOP_VERSION
+# Windows installers are too big to push through git from the shop line: they live on the GitHub release
+RELEASE_URL = f"https://github.com/charaflokman/tajer-site/releases/download/v{DESKTOP_VERSION}/"
 FILES = {
     "win64": (f"Tajer-{DESKTOP_VERSION}-win64.exe", "99 MB"),
     "win32": (f"Tajer-{DESKTOP_VERSION}-win32.exe", "98 MB"),
@@ -217,7 +219,7 @@ def page(k):
         f, size = FILES[key]
         h = SUMS.get(f)
         sha = (f'<div class="sha" dir="ltr">SHA256: <code>{h[:16]}</code> <button type="button" class="cp" data-h="{h}">{CP[k]}</button></div>') if h else ""
-        return (f'<div class="dlbox"><a class="dl" href="{root}downloads/{f}" download><span class="dl-name">{t[name]}</span>'
+        return (f'<div class="dlbox"><a class="dl" href="{(RELEASE_URL if f.endswith('.exe') else root + 'downloads/') + f}" download><span class="dl-name">{t[name]}</span>'
                 f'<span class="dl-note">{t[note]}</span><span class="dl-meta">{f} · {size}</span></a>{sha}</div>')
     return f"""<!doctype html>
 <html lang="{t['lang']}" dir="{t['dir']}">
