@@ -7,6 +7,14 @@ OWNER = sys.argv[1] if len(sys.argv) > 1 else "OWNER"
 DESKTOP_VERSION = "1.0.9"  # change here to switch the Windows download names
 ANDROID_VERSION = "1.0.7"  # change here to switch the Android download name
 VERSION = DESKTOP_VERSION
+BETA_VERSION = "1.1.0-beta1"  # desktop test build, shown below the stable downloads; "" hides it
+BETA_URL = f"https://github.com/charaflokman/tajer-site/releases/download/v{BETA_VERSION}/"
+BETA_FILES = {"win64": (f"Tajer-{BETA_VERSION}-win64.exe", "109 MB"), "win32": (f"Tajer-{BETA_VERSION}-win32.exe", "108 MB")}
+BETA_TXT = {
+    "ar": ("نسخة تجريبية للحاسوب %s (للتجربة فقط، ليست للاستعمال النهائي)", "ثبّتها على حاسوب للتجربة بعد نسخ بياناتك احتياطيا.", "ويندوز 64 بت", "ويندوز 32 بت"),
+    "fr": ("Version test bureau %s (pour essai seulement)", "Installez-la pour essai après une sauvegarde de vos données.", "Windows 64 bits", "Windows 32 bits"),
+    "en": ("Desktop test build %s (for testing only)", "Install it to try it, after backing up your data.", "Windows 64-bit", "Windows 32-bit"),
+}
 # Windows installers are too big to push through git from the shop line: they live on the GitHub release
 RELEASE_URL = f"https://github.com/charaflokman/tajer-site/releases/download/v{DESKTOP_VERSION}/"
 FILES = {
@@ -208,6 +216,20 @@ LINKS = {"ar": ("fr/", "en/"), "fr": ("../", "../en/"), "en": ("../", "../fr/")}
 SHOTS = {"ar": ["desktop-checkout-ar.png", "desktop-home-ar.png"], "fr": ["desktop-checkout-fr.png", "desktop-home-fr.png"],
          "en": ["desktop-checkout-fr.png", "desktop-home-fr.png"]}
 
+def beta_block(k, root):
+    if not BETA_VERSION:
+        return ""
+    h1, h2, n64, n32 = BETA_TXT[k]
+    boxes = ""
+    for key, nm in (("win64", n64), ("win32", n32)):
+        f, size = BETA_FILES[key]
+        h = SUMS.get(f)
+        sha = (f'<div class="sha" dir="ltr">SHA256: <code>{h[:16]}</code></div>') if h else ""
+        boxes += (f'<div class="dlbox"><a class="dl" href="{BETA_URL + f}" download><span class="dl-name">{nm}</span>'
+                  f'<span class="dl-meta">{f} · {size}</span></a>{sha}</div>')
+    return f'<h3 id="beta">{h1 % BETA_VERSION}</h3><p>{h2}</p><div class="dls">{boxes}</div>'
+
+
 def page(k):
     t = T[k]
     root = "" if k == "ar" else "../"
@@ -243,6 +265,7 @@ def page(k):
   <p class="beta">{t['beta'].replace('@V', VERSION)}</p>
   <h2 id="download">{t['dl']} <small>v{VERSION}</small></h2>
   <div class="dls">{dl('win64', 'win64', 'win64n')}{dl('win32', 'win32', 'win32n')}{dl('apk', 'apk', 'apkn')}</div>
+  {beta_block(k, root)}
   <p class="blk"><a href="blocked/">{BL[k]['nav']}</a></p>
 </section>
 <section class="shots wrap"><h2>{t['shots']}</h2><div class="shot-row">{shots}<img class="phone" src="{root}assets/img/android-checkout-api34.png" alt="" loading="lazy" width="1080" height="2340"></div></section>
