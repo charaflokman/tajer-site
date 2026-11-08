@@ -7,7 +7,7 @@ OWNER = sys.argv[1] if len(sys.argv) > 1 else "OWNER"
 DESKTOP_VERSION = "1.0.9"  # change here to switch the Windows download names
 ANDROID_VERSION = "1.0.7"  # change here to switch the Android download name
 VERSION = DESKTOP_VERSION
-BETA_VERSION = "1.1.0-beta2"  # desktop test build, shown below the stable downloads; "" hides it
+BETA_VERSION = "1.1.0-beta3"  # desktop test build, shown below the stable downloads; "" hides it
 BETA_URL = f"https://github.com/charaflokman/tajer-site/releases/download/v{BETA_VERSION}/"
 BETA_FILES = {"win64": (f"Tajer-{BETA_VERSION}-win64.exe", "109 MB"), "win32": (f"Tajer-{BETA_VERSION}-win32.exe", "108 MB")}
 BETA_TXT = {
@@ -221,7 +221,7 @@ def beta_block(k, root):
         return ""
     h1, h2, n64, n32 = BETA_TXT[k]
     boxes = ""
-    for key, nm in (("win64", n64), ("win32", n32)):
+    for key, nm in (("win64", n64),):  # win64 only for this beta
         f, size = BETA_FILES[key]
         h = SUMS.get(f)
         sha = (f'<div class="sha" dir="ltr">SHA256: <code>{h[:16]}</code></div>') if h else ""
