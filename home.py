@@ -10,6 +10,8 @@ N = {
         cta1="حمّل لويندوز", cta2="للهاتف أندرويد",
         facts=["يعمل بلا إنترنت", "6 لغات", "النسخة @V"],
         again="اطبع وصلا آخر", videos="فيديوهات الشرح", dlnav="التحميل",
+        vid_h="تعلّم في دقائق", vid_p="فيديوهات قصيرة بالعربية، كل واحد يشرح مهمة واحدة من يوم المحل.", vid_all="كل الفيديوهات (@N)",
+        foot_tag="برنامج بيع ومخزون وديون لكل محل.", foot_a="البرنامج", foot_b="المساعدة", foot_c="اللغة", this_lang="العربية",
         strip=["البيع بالباركود", "دفتر الديون", "المخزون بالصلاحية", "المشتريات", "التقارير", "النسخ الاحتياطي", "عدة صناديق", "الهاتف كقارئ"],
         day_h="يوم في المحل", day_p="من فتح الباب إلى إغلاق الصندوق، تاجر معك في كل خطوة.",
         day=[
@@ -44,6 +46,8 @@ N = {
         cta1="Télécharger pour Windows", cta2="Pour téléphone Android",
         facts=["Fonctionne sans Internet", "6 langues", "Version @V"],
         again="Imprimer un autre ticket", videos="Vidéos (arabe)", dlnav="Télécharger",
+        vid_h="Apprendre en quelques minutes", vid_p="De courtes vidéos en arabe, chacune montre une tâche de la journée du magasin.", vid_all="Toutes les vidéos (@N)",
+        foot_tag="Caisse, stock et crédit clients pour tout commerce.", foot_a="Le logiciel", foot_b="Aide", foot_c="Langue", this_lang="Français",
         strip=["Vente au code-barres", "Carnet de crédit", "Stock et péremption", "Achats", "Rapports", "Sauvegardes", "Plusieurs caisses", "Téléphone comme lecteur"],
         day_h="Une journée au magasin", day_p="De l'ouverture à la clôture de caisse, Tajer vous suit à chaque étape.",
         day=[
@@ -78,6 +82,8 @@ N = {
         cta1="Download for Windows", cta2="For Android phones",
         facts=["Works offline", "6 languages", "Version @V"],
         again="Print another receipt", videos="Videos (Arabic)", dlnav="Download",
+        vid_h="Learn in minutes", vid_p="Short videos in Arabic, each one shows a single task from the shop day.", vid_all="All videos (@N)",
+        foot_tag="Sales, stock and customer credit for any shop.", foot_a="The program", foot_b="Help", foot_c="Language", this_lang="English",
         strip=["Barcode sales", "Credit book", "Stock with expiry", "Purchases", "Reports", "Backups", "Several tills", "Phone as scanner"],
         day_h="A day in the shop", day_p="From opening the door to closing the till, Tajer is with you at every step.",
         day=[
@@ -148,6 +154,11 @@ def render(k, t, bl, c):
     reqs = "".join(f"<li>{r}</li>" for r in t["reqs"])
     hows = "".join(f"<li><span>{r}</span></li>" for r in t["hows"])
     l1, l2 = c["links"]
+    vdir = c["vid_link"]
+    vids = "".join(
+        f'<li class="rv"><a href="{vdir}ar/{f}.mp4"><span class="thumb"><img src="{vdir}ar/{f}.png" alt="" loading="lazy" width="640" height="360">'
+        f'<span class="play" aria-hidden="true"></span></span><span class="vn num">{i:02d}</span><span class="vt" lang="ar" dir="rtl">{title}</span></a></li>'
+        for i, (f, title) in enumerate(c["videos"][:4], 1))
     rc = json.dumps(n["rc"], ensure_ascii=False).replace("</", "<\\/")
 
     return f"""<!doctype html>
@@ -213,8 +224,14 @@ def render(k, t, bl, c):
   <ul class="stats">{stats}</ul>
 </div></section>
 
+<section class="sec"><div class="wrap">
+  {head(5, n['vid_h'], n['vid_p'])}
+  <ul class="vidrow">{vids}</ul>
+  <p class="help-link"><a class="btn" href="{vdir}">{n['vid_all'].replace('@N', str(len(c['videos'])))}</a></p>
+</div></section>
+
 <section class="sec" id="download"><div class="wrap">
-  {head(5, t['dl'] + ' <small class="num">v' + ver + '</small>', n['dl_p'])}
+  {head(6, t['dl'] + ' <small class="num">v' + ver + '</small>', n['dl_p'])}
   <div class="tix">{ticket('win64', 'win64', 'win64n', True)}{ticket('win32', 'win32', 'win32n')}{ticket('apk', 'apk', 'apkn')}</div>
   {beta}
   <p class="help-link"><a href="blocked/">{bl['nav']}</a></p>
@@ -224,10 +241,17 @@ def render(k, t, bl, c):
   </div>
 </div></section>
 
-<section class="wrap legal"><p>{t['legaltxt']}</p>
-<p><a href="{root}legal/SOURCE_OFFER.txt">{t['l1']}</a><a href="{root}legal/LICENSE-MRPL.txt">{t['l2']}</a><a href="{root}legal/THIRD_PARTY_LICENSES.md">{t['l3']}</a></p></section>
 </main>
-<footer class="foot"><div class="wrap foot-in"><div class="giant" aria-hidden="true">{n['brand']}</div><small>Tajer · تاجر — <span class="num">v{ver}</span></small></div></footer>
+<footer class="foot on-ink"><div class="wrap">
+  <div class="foot-top">
+    <div class="foot-say"><img src="{img}tajer-tile.svg" alt="" width="56" height="56"><p>{n['foot_tag']}</p><a class="btn go" href="#download">{n['dlnav']}</a></div>
+    <nav class="foot-col"><h3>{n['foot_a']}</h3><a href="#download">{t['dl']}</a><a href="{vdir}">{n['videos']}</a><a href="#beta">Beta</a></nav>
+    <nav class="foot-col"><h3>{n['foot_b']}</h3><a href="blocked/">{bl['nav']}</a><a href="{root}legal/SOURCE_OFFER.txt">{t['l1']}</a><a href="{root}legal/LICENSE-MRPL.txt">{t['l2']}</a><a href="{root}legal/THIRD_PARTY_LICENSES.md">{t['l3']}</a></nav>
+    <nav class="foot-col"><h3>{n['foot_c']}</h3><span class="cur">{n['this_lang']}</span><a href="{l1}">{t['other']}</a><a href="{l2}">{t['other2']}</a></nav>
+  </div>
+  <div class="giant" aria-hidden="true">{n['brand']}</div>
+  <div class="foot-end"><small>{t['legaltxt']}</small><small class="num">Tajer · تاجر — v{ver}</small></div>
+</div></footer>
 <script type="application/json" id="rc">{rc}</script>
 <script src="{root}assets/home.js"></script>
 </body>

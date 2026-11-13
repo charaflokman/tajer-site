@@ -24,11 +24,11 @@ h2 { font-size: 24px; margin: 56px 0 20px; }
 h2 small { font-size: 15px; font-weight: 400; color: var(--muted); }
 h3 { font-size: 18px; }
 
-.bar { background: var(--ink); color: var(--paper); }
+.bar { background: var(--paper); color: var(--ink); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 20; }
 .bar-in { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 16px; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 700; font-size: 22px; }
 .bar nav { display: flex; gap: 20px; }
-.bar nav a { text-decoration: none; opacity: .85; padding: 10px 0; }
+.bar nav a { text-decoration: none; padding: 10px 14px; font-weight: 700; border: 2px solid var(--ink); border-radius: 6px; }
 .bar nav a:hover, .bar nav a:focus-visible { opacity: 1; text-decoration: underline; text-underline-offset: 6px; }
 a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 
@@ -98,3 +98,11 @@ a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .win.term{background:#0c0c0c;color:#ddd}
 .win.term pre{margin:10px 12px;white-space:pre-wrap;word-break:break-all;font-size:.8rem}
 .win.term .hl{outline:none;color:#ffd8a8}
+
+/* aligned with the home page */
+.wrap { max-width: 1180px; padding: 0 clamp(16px, 4vw, 40px); }
+main.wrap { padding-block: clamp(40px, 6vw, 80px); }
+main.wrap > h1 { font-size: clamp(36px, 6vw, 72px); line-height: 1.25; letter-spacing: -.01em; max-width: 16em; }
+main.wrap > h1::after { content: ""; display: block; width: 72px; height: 6px; background: var(--accent); margin-top: 18px; }
+.help h2 { border-top: 3px solid var(--ink); padding-top: 12px; font-size: 26px; }
+.foot { background: var(--ink); color: var(--paper); max-width: none; margin-top: 48px; padding: 28px clamp(16px, 4vw, 40px); border: 0; }
