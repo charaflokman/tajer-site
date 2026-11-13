@@ -3,6 +3,8 @@ import io
 import os
 import sys
 
+import home
+
 OWNER = sys.argv[1] if len(sys.argv) > 1 else "OWNER"
 DESKTOP_VERSION = "1.0.9"  # change here to switch the Windows download names
 ANDROID_VERSION = "1.0.7"  # change here to switch the Android download name
@@ -284,7 +286,9 @@ here = os.path.dirname(os.path.abspath(__file__))
 for k, sub in (("ar", ""), ("fr", "fr"), ("en", "en")):
     d = os.path.join(here, sub)
     os.makedirs(d, exist_ok=True)
-    io.open(os.path.join(d, "index.html"), "w", encoding="utf-8", newline="\n").write(page(k))
+    ctx = dict(version=VERSION, files=FILES, sums=SUMS, release_url=RELEASE_URL, cp=CP[k], links=LINKS[k], vid_link=VID_LINK[k],
+               beta_version=BETA_VERSION, beta_url=BETA_URL, beta_files=BETA_FILES, beta_txt=BETA_TXT)
+    io.open(os.path.join(d, "index.html"), "w", encoding="utf-8", newline="\n").write(home.render(k, T[k], BL[k], ctx))
 for k, sub in (("ar", "blocked"), ("fr", "fr/blocked"), ("en", "en/blocked")):
     d = os.path.join(here, sub)
     os.makedirs(d, exist_ok=True)
