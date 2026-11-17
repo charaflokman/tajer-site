@@ -9,9 +9,9 @@ OWNER = sys.argv[1] if len(sys.argv) > 1 else "OWNER"
 DESKTOP_VERSION = "1.0.9"  # change here to switch the Windows download names
 ANDROID_VERSION = "1.0.7"  # change here to switch the Android download name
 VERSION = DESKTOP_VERSION
-BETA_VERSION = "1.1.0-beta4"  # desktop test build, shown below the stable downloads; "" hides it
+BETA_VERSION = "1.1.0-beta5"  # desktop test build, shown below the stable downloads; "" hides it
 BETA_URL = f"https://github.com/charaflokman/tajer-site/releases/download/v{BETA_VERSION}/"
-BETA_FILES = {"win64": (f"Tajer-{BETA_VERSION}-win64.exe", "109 MB"), "win32": (f"Tajer-{BETA_VERSION}-win32.exe", "108 MB")}
+BETA_FILES = {"win64": (f"Tajer-{BETA_VERSION}-win64.exe", "111 MB"), "win32": (f"Tajer-{BETA_VERSION}-win32.exe", "108 MB")}
 BETA_TXT = {
     "ar": ("نسخة تجريبية للحاسوب %s (للتجربة فقط، ليست للاستعمال النهائي)", "ثبّتها على حاسوب للتجربة بعد نسخ بياناتك احتياطيا.", "ويندوز 64 بت", "ويندوز 32 بت"),
     "fr": ("Version test bureau %s (pour essai seulement)", "Installez-la pour essai après une sauvegarde de vos données.", "Windows 64 bits", "Windows 32 bits"),
