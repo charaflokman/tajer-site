@@ -6,8 +6,8 @@ import sys
 import home
 
 OWNER = sys.argv[1] if len(sys.argv) > 1 else "OWNER"
-DESKTOP_VERSION = "1.1.0"  # change here to switch the Windows download names
-ANDROID_VERSION = "1.1.0"  # change here to switch the Android download name
+DESKTOP_VERSION = "1.1.1"  # change here to switch the Windows download names
+ANDROID_VERSION = "1.1.1"  # change here to switch the Android download name
 VERSION = DESKTOP_VERSION
 BETA_VERSION = ""  # desktop test build, shown below the stable downloads; "" hides it
 BETA_URL = f"https://github.com/charaflokman/tajer-site/releases/download/v{BETA_VERSION}/"
@@ -20,9 +20,9 @@ BETA_TXT = {
 # Windows installers are too big to push through git from the shop line: they live on the GitHub release
 RELEASE_URL = f"https://github.com/charaflokman/tajer-site/releases/download/v{DESKTOP_VERSION}/"
 FILES = {
-    "win64": (f"Tajer-{DESKTOP_VERSION}-win64.exe", "113 MB"),
-    "win32": (f"Tajer-{DESKTOP_VERSION}-win32.exe", "112 MB"),
-    "apk": (f"Tajer-{ANDROID_VERSION}.apk", "8 MB"),
+    "win64": (f"Tajer-{DESKTOP_VERSION}-win64.exe", "114 MB"),
+    "win32": (f"Tajer-{DESKTOP_VERSION}-win32.exe", "113 MB"),
+    "apk": (f"Tajer-{ANDROID_VERSION}.apk", "9 MB"),
 }
 
 
