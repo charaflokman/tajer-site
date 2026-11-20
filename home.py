@@ -129,7 +129,7 @@ def render(k, t, bl, c):
     def ticket(key, name, note, main=False):
         f, size = c["files"][key]
         h = c["sums"].get(f)
-        href = (c["release_url"] if f.endswith(".exe") else root + "downloads/") + f
+        href = (c["release_url_for"](f) if f.endswith(".exe") else root + "downloads/") + f
         sha = (f'<div class="sha">SHA256 <code>{h[:16]}</code><button type="button" class="cp" data-h="{h}">{c["cp"]}</button></div>') if h else ""
         return (f'<div class="tk{" main" if main else ""} rv"><a class="hit" href="{href}" download><span class="hole"></span>'
                 f'<span class="name">{t[name]}</span><span class="note">{t[note]}</span>'

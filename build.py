@@ -6,8 +6,9 @@ import sys
 import home
 
 OWNER = sys.argv[1] if len(sys.argv) > 1 else "OWNER"
-DESKTOP_VERSION = "1.1.2"  # change here to switch the Windows download names
+DESKTOP_VERSION = "1.1.3"  # change here to switch the Windows download names
 ANDROID_VERSION = "1.1.2"  # change here to switch the Android download name
+WIN32_VERSION = "1.1.2"  # win32 installer lags behind win64 until its build is uploaded
 VERSION = DESKTOP_VERSION
 BETA_VERSION = ""  # desktop test build, shown below the stable downloads; "" hides it
 BETA_URL = f"https://github.com/charaflokman/tajer-site/releases/download/v{BETA_VERSION}/"
@@ -18,10 +19,14 @@ BETA_TXT = {
     "en": ("Desktop test build %s (for testing only)", "Install it to try it, after backing up your data.", "Windows 64-bit", "Windows 32-bit"),
 }
 # Windows installers are too big to push through git from the shop line: they live on the GitHub release
-RELEASE_URL = f"https://github.com/charaflokman/tajer-site/releases/download/v{DESKTOP_VERSION}/"
+def release_url(fn):
+    """GitHub release folder of an installer file name (version is read from the name)."""
+    ver = fn.split("-")[1]
+    return f"https://github.com/charaflokman/tajer-site/releases/download/v{ver}/"
+RELEASE_URL = release_url(f"Tajer-{DESKTOP_VERSION}-win64.exe")
 FILES = {
     "win64": (f"Tajer-{DESKTOP_VERSION}-win64.exe", "114 MB"),
-    "win32": (f"Tajer-{DESKTOP_VERSION}-win32.exe", "113 MB"),
+    "win32": (f"Tajer-{WIN32_VERSION}-win32.exe", "113 MB"),
     "apk": (f"Tajer-{ANDROID_VERSION}.apk", "9 MB"),
 }
 
@@ -243,7 +248,7 @@ def page(k):
         f, size = FILES[key]
         h = SUMS.get(f)
         sha = (f'<div class="sha" dir="ltr">SHA256: <code>{h[:16]}</code> <button type="button" class="cp" data-h="{h}">{CP[k]}</button></div>') if h else ""
-        return (f'<div class="dlbox"><a class="dl" href="{(RELEASE_URL if f.endswith('.exe') else root + 'downloads/') + f}" download><span class="dl-name">{t[name]}</span>'
+        return (f'<div class="dlbox"><a class="dl" href="{(release_url(f) if f.endswith('.exe') else root + 'downloads/') + f}" download><span class="dl-name">{t[name]}</span>'
                 f'<span class="dl-note">{t[note]}</span><span class="dl-meta">{f} · {size}</span></a>{sha}</div>')
     return f"""<!doctype html>
 <html lang="{t['lang']}" dir="{t['dir']}">
@@ -286,7 +291,7 @@ here = os.path.dirname(os.path.abspath(__file__))
 for k, sub in (("ar", ""), ("fr", "fr"), ("en", "en")):
     d = os.path.join(here, sub)
     os.makedirs(d, exist_ok=True)
-    ctx = dict(version=VERSION, files=FILES, sums=SUMS, release_url=RELEASE_URL, cp=CP[k], links=LINKS[k], vid_link=VID_LINK[k],
+    ctx = dict(version=VERSION, files=FILES, sums=SUMS, release_url=RELEASE_URL, release_url_for=release_url, cp=CP[k], links=LINKS[k], vid_link=VID_LINK[k],
                videos=VIDEOS, beta_version=BETA_VERSION, beta_url=BETA_URL, beta_files=BETA_FILES, beta_txt=BETA_TXT)
     io.open(os.path.join(d, "index.html"), "w", encoding="utf-8", newline="\n").write(home.render(k, T[k], BL[k], ctx))
 for k, sub in (("ar", "blocked"), ("fr", "fr/blocked"), ("en", "en/blocked")):
