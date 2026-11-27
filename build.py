@@ -6,9 +6,9 @@ import sys
 import home
 
 OWNER = sys.argv[1] if len(sys.argv) > 1 else "OWNER"
-DESKTOP_VERSION = "1.1.3"  # change here to switch the Windows download names
+DESKTOP_VERSION = "1.1.4"  # change here to switch the Windows download names
 ANDROID_VERSION = "1.1.3"  # change here to switch the Android download name
-WIN32_VERSION = "1.1.2"  # win32 installer lags behind win64 until its build is uploaded
+WIN32_VERSION = "1.1.4"  # win32 installer lags behind win64 until its build is uploaded
 VERSION = DESKTOP_VERSION
 BETA_VERSION = ""  # desktop test build, shown below the stable downloads; "" hides it
 BETA_URL = f"https://github.com/charaflokman/tajer-site/releases/download/v{BETA_VERSION}/"
